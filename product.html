@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Details - WEAR IT!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Header -->
+  <header class="p-4 bg-white shadow flex justify-between items-center">
+  <a href="index.html" class="text-2xl font-bold">WEAR IT!</a>
+  <nav class="flex items-center gap-6">
+    <a href="shop.html" class="hover:text-gray-700">Shop</a>
+    <a href="cart.html" class="relative flex items-center gap-1 text-brand-700 font-medium">
+      🛒 Cart
+      <span id="cart-count"
+        class="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+        0
+      </span>
+    </a>
+  </nav>
+</header>
+
+
+  <!-- Product Container -->
+  <main class="max-w-6xl mx-auto p-6">
+    <div id="product-container" class="grid md:grid-cols-2 gap-10">
+      <!-- Dynamic product content loads here -->
+    </div>
+  </main>
+
+  <script>
+    // Product list (same as your shop.js array)
+    const products = [
+      { id: 1, name: 'Oversize Hoodie — Jet Black', price: 1499, img: 'https://static.vecteezy.com/system/resources/thumbnails/056/106/307/small/a-sleek-black-hoodie-displayed-png.png', tag: 'new', date: '2025-08-12' },
+      { id: 2, name: 'Classic Tee — Off-White', price: 799, img: 'https://i5.walmartimages.com/seo/Gildan-Short-Sleeve-Crewneck-T-Shirt-Off-White-Size-XL-Men-s-Classic-Fit-Comfort-Tee-100-Heavy-Cotton-Arts-and-Craft-Shirt_6ae50ea8-6b63-456a-bcff-dcbfcb1a52ec.d9dc0f7a2fbdf1d8b84534f9efcb950c.jpeg', tag: 'new', date: '2025-08-10' },
+      { id: 3, name: 'Relaxed Jeans — Indigo', price: 1999, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MDORb_PdmL73qddQUFTyFgJfWHOTBKAgBA&s', tag: 'trend', date: '2025-08-02' },
+      { id: 4, name: 'Ribbed Tank — Sage', price: 699, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7_lNAHOr5gRCT2DOBov3QDD0HekK8aXu-TOGjSzn6A7GNzBdvwN7bUNsN2K_yJ-FZjE0&usqp=CAU', tag: 'trend', date: '2025-07-28' },
+      { id: 5, name: 'Utility Cap — Sand', price: 599, img: 'https://ethikworldwide.com/cdn/shop/products/Ethikworldwide621524cdd792a8621524cdd7be6.93814197621524cdd7be6.png?v=1645552873&width=1445', tag: 'drop', date: '2025-07-22' },
+      { id: 6, name: 'Everyday Tote — Charcoal', price: 1299, img: 'https://m.media-amazon.com/images/I/51uqEJ0qvXL._UY1100_.jpg', tag: 'drop', date: '2025-07-18' },
+      { id: 7, name: 'Cropped Tee — Blush', price: 899, img: 'https://m.media-amazon.com/images/I/71nAufY+TpL._UY1100_.jpg', tag: 'new', date: '2025-08-14' },
+      { id: 8, name: 'Linen Shirt — Sky', price: 1699, img: 'https://5.imimg.com/data5/SELLER/Default/2021/10/LB/OI/ZU/6386907/linen-shirts-500x500.jpg', tag: 'trend', date: '2025-07-05' },
+    ];
+
+    // Read product ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = parseInt(urlParams.get("id"));
+    const product = products.find(p => p.id === productId);
+
+    // Render product
+    if(product) {
+      document.getElementById("product-container").innerHTML = `
+        <img src="${product.img}" alt="${product.name}" class="w-full h-96 object-contain rounded-2xl bg-white p-4 shadow" />
+        <div>
+          <h1 class="text-3xl font-bold mb-3">${product.name}</h1>
+          <p class="text-xl text-gray-700 mb-4">₹${product.price}</p>
+          <p class="mb-6 text-gray-600">This ${product.tag} release is crafted with comfort and style in mind. Dropped on <strong>${product.date}</strong>.</p>
+          <button class="px-6 py-3 rounded-2xl bg-black text-white hover:bg-gray-800">Add to Cart</button>
+        </div>
+      `;
+    } else {
+      document.getElementById("product-container").innerHTML = `
+        <p class="text-red-600 text-lg">Product not found.</p>
+      `;
+    }
+  </script>
+
+</body>
+<script>
+  function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    document.getElementById("cart-count").textContent =
+      cart.reduce((sum, item) => sum + item.qty, 0);
+  }
+  updateCartCount();
+</script>
+
+</html>

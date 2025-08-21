@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - WEAR IT!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header -->
+  <header class="p-4 bg-white shadow flex justify-between items-center">
+    <a href="index.html" class="text-2xl font-bold">WEAR IT!</a>
+    <nav class="flex items-center gap-6">
+      <a href="shop.html" class="hover:text-gray-700">Shop</a>
+      <a href="cart.html" class="relative flex items-center gap-1 text-brand-700 font-medium">
+        🛒 Cart
+        <span id="cart-count"
+          class="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+          0
+        </span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Filters -->
+  <section class="p-6 bg-white shadow flex flex-wrap gap-6 items-center">
+    <!-- Tag Filter -->
+    <div>
+      <label class="font-medium">Type:</label>
+      <select id="tag-filter" class="border rounded-lg p-2">
+        <option value="all">All</option>
+        <option value="new">New</option>
+        <option value="trend">Trend</option>
+        <option value="drop">Drop</option>
+      </select>
+    </div>
+
+    <!-- Price Filter -->
+    <div>
+      <label class="font-medium">Price:</label>
+      <select id="price-filter" class="border rounded-lg p-2">
+        <option value="all">All</option>
+        <option value="0-1000">₹0 - ₹1000</option>
+        <option value="1000-2000">₹1000 - ₹2000</option>
+        <option value="2000-5000">₹2000 - ₹5000</option>
+      </select>
+    </div>
+
+    <!-- Sort -->
+    <div>
+      <label class="font-medium">Sort By:</label>
+      <select id="sort-filter" class="border rounded-lg p-2">
+        <option value="latest">Latest</option>
+        <option value="trend">Top Trend</option>
+        <option value="low">Lowest Price</option>
+        <option value="high">Highest Price</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Product Grid -->
+  <main class="p-8">
+    <h1 class="text-3xl font-bold mb-6">Shop Our Collection</h1>
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </main>
+
+  <script>
+    // Product Data
+    const products = [
+      { id: 1, name: 'Oversize Hoodie — Jet Black', price: 1499, img: 'https://static.vecteezy.com/system/resources/thumbnails/056/106/307/small/a-sleek-black-hoodie-displayed-png.png', tag: 'new', date: '2025-08-12' },
+      { id: 2, name: 'Classic Tee — Off-White', price: 799, img: 'https://i5.walmartimages.com/seo/Gildan-Short-Sleeve-Crewneck-T-Shirt-Off-White-Size-XL-Men-s-Classic-Fit-Comfort-Tee-100-Heavy-Cotton-Arts-and-Craft-Shirt_6ae50ea8-6b63-456a-bcff-dcbfcb1a52ec.d9dc0f7a2fbdf1d8b84534f9efcb950c.jpeg', tag: 'new', date: '2025-08-10' },
+      { id: 3, name: 'Relaxed Jeans — Indigo', price: 1999, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MDORb_PdmL73qddQUFTyFgJfWHOTBKAgBA&s', tag: 'trend', date: '2025-08-02' },
+      { id: 4, name: 'Ribbed Tank — Sage', price: 699, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7_lNAHOr5gRCT2DOBov3QDD0HekK8aXu-TOGjSzn6A7GNzBdvwN7bUNsN2K_yJ-FZjE0&usqp=CAU', tag: 'trend', date: '2025-07-28' },
+      { id: 5, name: 'Utility Cap — Sand', price: 599, img: 'https://ethikworldwide.com/cdn/shop/products/Ethikworldwide621524cdd792a8621524cdd7be6.93814197621524cdd7be6.png?v=1645552873&width=1445', tag: 'drop', date: '2025-07-22' },
+      { id: 6, name: 'Everyday Tote — Charcoal', price: 1299, img: 'https://m.media-amazon.com/images/I/51uqEJ0qvXL._UY1100_.jpg', tag: 'drop', date: '2025-07-18' },
+      { id: 7, name: 'Cropped Tee — Blush', price: 899, img: 'https://m.media-amazon.com/images/I/71nAufY+TpL._UY1100_.jpg', tag: 'new', date: '2025-08-14' },
+      { id: 8, name: 'Linen Shirt — Sky', price: 1699, img: 'https://5.imimg.com/data5/SELLER/Default/2021/10/LB/OI/ZU/6386907/linen-shirts-500x500.jpg', tag: 'trend', date: '2025-07-05' },
+    ];
+
+    const grid = document.getElementById("product-grid");
+
+    function renderProducts(list) {
+      grid.innerHTML = "";
+      list.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "bg-white shadow rounded-xl overflow-hidden p-4 flex flex-col";
+        div.innerHTML = `
+          <a href="product.html?id=${p.id}">
+            <img src="${p.img}" alt="${p.name}" class="w-full h-48 object-contain mb-3">
+          </a>
+          <h2 class="font-semibold">${p.name}</h2>
+          <p class="text-gray-500 mb-2">₹${p.price}</p>
+          <button onclick="addToCart(${p.id})"
+            class="bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition">
+            Add to Cart
+          </button>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    // Add to Cart
+    function addToCart(id) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let product = products.find(p => p.id === id);
+      let existing = cart.find(item => item.id === id);
+
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    // Update Cart Badge
+    function updateCartCount() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      document.getElementById("cart-count").textContent =
+        cart.reduce((sum, item) => sum + item.qty, 0);
+    }
+
+    // Filter & Sort
+    function applyFilters() {
+      let tag = document.getElementById("tag-filter").value;
+      let price = document.getElementById("price-filter").value;
+      let sort = document.getElementById("sort-filter").value;
+
+      let filtered = [...products];
+
+      // Tag filter
+      if (tag !== "all") {
+        filtered = filtered.filter(p => p.tag === tag);
+      }
+
+      // Price filter
+      if (price !== "all") {
+        const [min, max] = price.split("-").map(Number);
+        filtered = filtered.filter(p => p.price >= min && p.price <= max);
+      }
+
+      // Sorting
+      if (sort === "latest") {
+        filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+      } else if (sort === "trend") {
+        filtered = filtered.filter(p => p.tag === "trend");
+      } else if (sort === "low") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sort === "high") {
+        filtered.sort((a, b) => b.price - a.price);
+      }
+
+      renderProducts(filtered);
+    }
+
+    // Event Listeners
+    document.getElementById("tag-filter").addEventListener("change", applyFilters);
+    document.getElementById("price-filter").addEventListener("change", applyFilters);
+    document.getElementById("sort-filter").addEventListener("change", applyFilters);
+
+    // Init
+    updateCartCount();
+    applyFilters();
+  </script>
+</body>
+</html>

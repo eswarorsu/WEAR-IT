@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart - WEAR IT!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Header -->
+  <header class="p-4 bg-white shadow flex justify-between items-center">
+  <a href="index.html" class="text-2xl font-bold">WEAR IT!</a>
+  <nav class="flex items-center gap-6">
+    <a href="shop.html" class="hover:text-gray-700">Shop</a>
+    <a href="cart.html" class="relative flex items-center gap-1 text-brand-700 font-medium">
+      🛒 Cart
+      <span id="cart-count"
+        class="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+        0
+      </span>
+    </a>
+  </nav>
+</header>
+
+
+  <!-- Cart Page -->
+  <main class="max-w-5xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Your Shopping Cart</h1>
+
+    <!-- Cart Items -->
+    <div id="cart-items" class="space-y-6"></div>
+
+    <!-- Cart Summary -->
+    <div id="cart-summary" class="mt-8 p-6 bg-white shadow rounded-2xl hidden">
+      <div class="flex justify-between text-lg font-semibold mb-4">
+        <span>Total:</span>
+        <span id="cart-total">₹0</span>
+      </div>
+      <button class="w-full bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition">
+        <a href="checkout.html" 
+   class="block w-full text-center bg-black text-white py-2 rounded-lg hover:bg-gray-800">
+   Checkout
+</a>
+
+      </button>
+    </div>
+
+    <!-- Empty Cart -->
+    <div id="empty-cart" class="text-center text-gray-500 mt-10">
+      Your cart is empty 🛒
+    </div>
+  </main>
+
+  <script>
+    function updateCart() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let cartItemsDiv = document.getElementById("cart-items");
+      let emptyCartDiv = document.getElementById("empty-cart");
+      let summaryDiv = document.getElementById("cart-summary");
+      let cartCount = document.getElementById("cart-count");
+
+      cartItemsDiv.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        emptyCartDiv.style.display = "block";
+        summaryDiv.style.display = "none";
+        cartCount.textContent = "0";
+        return;
+      }
+
+      emptyCartDiv.style.display = "none";
+      summaryDiv.style.display = "block";
+
+      cart.forEach((item, index) => {
+        total += item.price * item.qty;
+
+        cartItemsDiv.innerHTML += `
+          <div class="flex items-center justify-between bg-white p-4 shadow rounded-xl">
+            <div class="flex items-center gap-4">
+              <img src="${item.img}" alt="${item.name}" class="w-20 h-20 object-contain rounded">
+              <div>
+                <h2 class="font-semibold">${item.name}</h2>
+                <p class="text-gray-500">₹${item.price}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <button onclick="changeQty(${index}, -1)" class="px-2 py-1 bg-gray-200 rounded">-</button>
+              <span>${item.qty}</span>
+              <button onclick="changeQty(${index}, 1)" class="px-2 py-1 bg-gray-200 rounded">+</button>
+              <button onclick="removeItem(${index})" class="ml-4 text-red-500">Remove</button>
+            </div>
+          </div>
+        `;
+      });
+
+      document.getElementById("cart-total").textContent = "₹" + total;
+      cartCount.textContent = cart.reduce((sum, i) => sum + i.qty, 0);
+    }
+
+    function changeQty(index, change) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      if (cart[index].qty + change > 0) {
+        cart[index].qty += change;
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCart();
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCart();
+    }
+
+    // Load cart when page loads
+    updateCart();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WEAR‑IT — Fashion for Everyone</title>
+  <meta name="description" content="WEAR‑IT is a modern fashion brand. Discover new arrivals, trending styles, and exclusive drops." />
+
+  <!-- Tailwind CSS (CDN for quick prototyping) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind on-the-fly config (optional aesthetic tweaks)
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Poppins', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f7ff', 100: '#e8ecff', 200: '#cfd8ff', 300: '#a7b6ff', 400: '#7a8bff', 500: '#5b6aff', 600: '#3a48f6', 700: '#2d39cf', 800: '#242fa3', 900: '#1e287f',
+            },
+          },
+          boxShadow: {
+            soft: '0 10px 25px rgb(0 0 0 / 0.06)'
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Font (optional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Small polish for focus styles + smooth scrolling */
+    :root { scroll-behavior: smooth; }
+    .focus-ring:focus { outline: 2px solid #3a48f6; outline-offset: 2px; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 font-display">
+  <!-- Announcement Bar -->
+  <div class="bg-black text-white text-center text-sm py-2">Free shipping over ₹1,999 · Easy returns 14 days</div>
+
+  <!-- Header / Navigation -->
+  <header class="p-4 bg-white shadow flex justify-between items-center">
+  <a href="index.html" class="text-2xl font-bold">WEAR IT!</a>
+  <nav class="flex items-center gap-6">
+    <a href="shop.html" class="hover:text-gray-700">Shop</a>
+    <a href="#new" class="hover:text-brand-700">New Arrivals</a>
+   <nav class="flex items-center gap-6">
+
+  <!-- Login/Logout -->
+  <a id="auth-link" href="login.html" class="hover:text-gray-700 font-medium">Login</a>
+</nav>
+
+    <a href="cart.html" class="relative flex items-center gap-1 text-brand-700 font-medium">
+      🛒 Cart
+      <span id="cart-count"
+        class="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+        0
+      </span>
+    </a>
+  </nav>
+</header>
+          
+
+        <!-- Mobile menu button -->
+        <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100" aria-label="Open Menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobileNav" class="md:hidden hidden border-t border-gray-200">
+      <nav class="px-4 py-3 flex flex-col gap-3">
+        <a href="#shop" class="py-2">Shop</a>
+        <a href="#new" class="py-2">New Arrivals</a>
+        <a href="#about" class="py-2">About</a>
+        <a href="#contact" class="py-2">Contact</a>
+        <a href="#login" class="py-2">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative isolate overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <img src="https://www.shutterstock.com/image-photo/young-couple-trendy-autumn-outfit-260nw-2023605341.jpg" alt="Fashion banner" class="h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/20"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 sm:py-36">
+      <div class="max-w-2xl text-white">
+        <h1 class="text-4xl sm:text-6xl font-bold leading-tight">Wear it. Own it.</h1>
+        <p class="mt-4 text-lg sm:text-xl text-white/90">Fresh drops every week. Street‑ready fits and timeless essentials designed for comfort.</p>
+        <div class="mt-8 flex gap-3">
+          <a href="#shop" class="px-5 py-3 rounded-2xl bg-white text-gray-900 font-semibold shadow-soft focus-ring">Shop Now</a>
+          <a href="#new" class="px-5 py-3 rounded-2xl bg-black/40 backdrop-blur border border-white/30 text-white font-semibold focus-ring">New Arrivals</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section id="shop" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex items-end justify-between">
+      <h2 class="text-2xl sm:text-3xl font-semibold">Shop by Category</h2>
+      <a href="shop.html" class="text-brand-700 font-medium">View all</a>
+    </div>
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Men -->
+      <a href="shop.html" class="group relative overflow-hidden rounded-3xl shadow-soft">
+        <img src="https://i.pinimg.com/736x/da/ae/14/daae1479ef31aa551dedb1921b7d174b.jpg" alt="Men's collection" class="h-60 w-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div class="absolute bottom-4 left-4 text-white">
+          <p class="text-lg font-semibold">Men</p>
+          <p class="text-sm text-white/80">Hoodies · Tees · Denim</p>
+        </div>
+      </a>
+      <!-- Women -->
+      <a href="shop.html" class="group relative overflow-hidden rounded-3xl shadow-soft">
+        <img src="https://www.versace.com/dw/image/v2/BGWN_PRD/on/demandware.static/-/Library-Sites-ver-library/default/dwf4c1ed19/images/world-of-versace/fashionshow-ss23-women-23092022-look-28-01-desk.jpg" alt="Women's collection" class="h-60 w-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div class="absolute bottom-4 left-4 text-white">
+          <p class="text-lg font-semibold">Women</p>
+          <p class="text-sm text-white/80">Dresses · Tops · Denim</p>
+        </div>
+      </a>
+      <!-- Accessories -->
+      <a href="shop.html" class="group relative overflow-hidden rounded-3xl shadow-soft">
+        <img src="https://www.shutterstock.com/shutterstock/photos/395182768/display_1500/stock-photo-clothing-and-accessories-for-men-and-women-ready-for-travel-life-style-395182768.jpg" alt="Accessories" class="h-60 w-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div class="absolute bottom-4 left-4 text-white">
+          <p class="text-lg font-semibold">Accessories</p>
+          <p class="text-sm text-white/80">Bags · Caps · Socks</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- New Arrivals -->
+  <section id="new" class="bg-gray-50 border-y">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="flex items-end justify-between">
+        <h2 class="text-2xl sm:text-3xl font-semibold">New Arrivals</h2>
+        <div>
+          <button id="sortBtn" class="text-sm px-3 py-2 rounded-xl border hover:bg-white">Sort: <span id="sortLabel">Newest</span></button>
+        </div>
+      </div>
+
+      <div id="productGrid" class="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- About Preview -->
+  <section id="about" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+    <h2 class="text-2xl sm:text-3xl font-semibold">Built on quality. Designed for everyday.</h2>
+    <p class="mt-4 text-gray-600">WEAR‑IT blends comfort with clean silhouettes and responsible sourcing. We’re rolling out sustainable fabrics and small‑batch drops to minimise waste.</p>
+    <a href="#contact" class="mt-6 inline-block px-5 py-3 rounded-2xl bg-gray-900 text-white font-semibold shadow-soft">Work with us</a>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="bg-black">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-white">
+      <div class="md:flex items-center justify-between gap-6">
+        <div>
+          <h3 class="text-2xl font-semibold">Join the list</h3>
+          <p class="text-white/70 mt-1">Be first to know about new drops and limited runs.</p>
+        </div>
+        <form class="mt-6 md:mt-0 flex w-full md:w-auto gap-3" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+          <input type="email" required placeholder="you@example.com" class="w-full md:w-80 px-4 py-3 rounded-2xl text-gray-900" />
+          <button class="px-5 py-3 rounded-2xl bg-white text-gray-900 font-semibold">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="border-t">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-2 sm:grid-cols-4 gap-8">
+      <div class="col-span-2 sm:col-span-1">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-brand-700"></div>
+          <span class="text-lg font-bold">WEAR‑IT</span>
+        </div>
+        <p class="mt-3 text-sm text-gray-600">Street style · Minimal cuts · Everyday comfort</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Shop</h4>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li><a href="shop.html" class="hover:text-gray-900">All Products</a></li>
+          <li><a href="shop.html" class="hover:text-gray-900">Men</a></li>
+          <li><a href="shop.html" class="hover:text-gray-900">Women</a></li>
+          <li><a href="shop.html" class="hover:text-gray-900">Accessories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Company</h4>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li><a href="#about" class="hover:text-gray-900">About</a></li>
+          <li><a href="#contact" class="hover:text-gray-900">Contact</a></li>
+          <li><a href="#" class="hover:text-gray-900">Returns & FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Get in touch</h4>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li>Email: Wear-it@gmail.com </li>
+          <li>Instagram · Twitter · TikTok</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-600">
+        <p>© <span id="year"></span> WEAR‑IT. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-gray-900">Privacy</a>
+          <a href="#" class="hover:text-gray-900">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Script: mock products + basic interactions -->
+  <script>
+    const products = [
+      { id: 1, name: 'Oversize Hoodie — Jet Black', price: 1499, img: 'https://static.vecteezy.com/system/resources/thumbnails/056/106/307/small/a-sleek-black-hoodie-displayed-png.png', tag: 'new', date: '2025-08-12' },
+      { id: 2, name: 'Classic Tee — Off‑White', price: 799, img: 'https://i5.walmartimages.com/seo/Gildan-Short-Sleeve-Crewneck-T-Shirt-Off-White-Size-XL-Men-s-Classic-Fit-Comfort-Tee-100-Heavy-Cotton-Arts-and-Craft-Shirt_6ae50ea8-6b63-456a-bcff-dcbfcb1a52ec.d9dc0f7a2fbdf1d8b84534f9efcb950c.jpeg', tag: 'new', date: '2025-08-10' },
+      { id: 3, name: 'Relaxed Jeans — Indigo', price: 1999, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MDORb_PdmL73qddQUFTyFgJfWHOTBKAgBA&s', tag: 'trend', date: '2025-08-02' },
+      { id: 4, name: 'Ribbed Tank — Sage', price: 699, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7_lNAHOr5gRCT2DOBov3QDD0HekK8aXu-TOGjSzn6A7GNzBdvwN7bUNsN2K_yJ-FZjE0&usqp=CAU', tag: 'trend', date: '2025-07-28' },
+      { id: 5, name: 'Utility Cap — Sand', price: 599, img: 'https://ethikworldwide.com/cdn/shop/products/Ethikworldwide621524cdd792a8621524cdd7be6.93814197621524cdd7be6.png?v=1645552873&width=1445', tag: 'drop', date: '2025-07-22' },
+      { id: 6, name: 'Everyday Tote — Charcoal', price: 1299, img: 'https://m.media-amazon.com/images/I/51uqEJ0qvXL._UY1100_.jpg', tag: 'drop', date: '2025-07-18' },
+      { id: 7, name: 'Cropped Tee — Blush', price: 899, img: 'https://m.media-amazon.com/images/I/71nAufY+TpL._UY1100_.jpg', tag: 'new', date: '2025-08-14' },
+      { id: 8, name: 'Linen Shirt — Sky', price: 1699, img: 'https://5.imimg.com/data5/SELLER/Default/2021/10/LB/OI/ZU/6386907/linen-shirts-500x500.jpg', tag: 'trend', date: '2025-07-05' },
+    ];
+
+    const productGrid = document.getElementById('productGrid');
+    const sortBtn = document.getElementById('sortBtn');
+    const sortLabel = document.getElementById('sortLabel');
+    let sortMode = 'newest';
+
+    function renderProducts(list) {
+      productGrid.innerHTML = list.map(p => `
+        <article class="group bg-white rounded-2xl overflow-hidden border hover:shadow-soft transition">
+          <a href="product.html?id=${p.id}" class="block relative">
+            <img src="${p.img}" alt="${p.name}" class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+            <span class="absolute top-3 left-3 text-xs px-2 py-1 rounded-full bg-white/90 border">${p.tag}</span>
+          </a>
+          <div class="p-4">
+            <h3 class="font-medium leading-snug">${p.name}</h3>
+            <div class="mt-2 flex items-center justify-between">
+              <p class="font-semibold">₹${p.price.toLocaleString('en-IN')}</p>
+              <button data-id="${p.id}" class="add-to-cart text-sm px-3 py-1.5 rounded-xl border hover:bg-gray-50">Add to cart</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      // Bind add-to-cart
+      document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = +btn.getAttribute('data-id');
+          addToCart(id);
+        });
+      });
+    }
+
+    function sortProducts(mode){
+      const list = [...products];
+      if(mode === 'newest') list.sort((a,b) => new Date(b.date) - new Date(a.date));
+      if(mode === 'priceLow') list.sort((a,b) => a.price - b.price);
+      if(mode === 'priceHigh') list.sort((a,b) => b.price - a.price);
+      renderProducts(list);
+    }
+
+    // Cart (very basic mock)
+    const cartKey = 'wearit_cart';
+    function getCart(){
+      try { return JSON.parse(localStorage.getItem(cartKey)) || []; } catch { return []; }
+    }
+    function setCart(v){ localStorage.setItem(cartKey, JSON.stringify(v)); updateCartCount(); }
+    function addToCart(productId){
+      const cart = getCart();
+      const item = cart.find(i => i.id === productId);
+      if(item) { item.qty += 1; } else { cart.push({ id: productId, qty: 1 }); }
+      setCart(cart);
+    }
+    function updateCartCount(){
+      const count = getCart().reduce((sum, i) => sum + i.qty, 0);
+      const el = document.getElementById('cart-count');
+      if(el) el.textContent = count;
+    }
+
+    // Sort button cycle
+    sortBtn?.addEventListener('click', () => {
+      sortMode = sortMode === 'newest' ? 'priceLow' : sortMode === 'priceLow' ? 'priceHigh' : 'newest';
+      sortLabel.textContent = sortMode === 'newest' ? 'Newest' : sortMode === 'priceLow' ? 'Price: Low → High' : 'Price: High → Low';
+      sortProducts(sortMode);
+    });
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn?.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+
+    // Init
+    document.getElementById('year').textContent = new Date().getFullYear();
+    updateCartCount();
+    sortProducts('newest');
+  </script>
+  <script>
+  function updateAuthLink() {
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
+    const authLink = document.getElementById("auth-link");
+
+    if (user) {
+      authLink.textContent = "Logout";
+      authLink.href = "#"; // prevent redirect
+      authLink.onclick = () => {
+        localStorage.removeItem("loggedInUser");
+        alert("You have logged out!");
+        window.location.reload();
+      };
+    } else {
+      authLink.textContent = "Login";
+      authLink.href = "login.html";
+    }
+  }
+
+  updateAuthLink();
+</script>
+
+</body>
+<script>
+  function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    document.getElementById("cart-count").textContent =
+      cart.reduce((sum, item) => sum + item.qty, 0);
+  }
+  updateCartCount();
+</script>
+
+</html>
