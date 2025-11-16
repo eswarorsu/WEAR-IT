@@ -38,10 +38,14 @@
   </style>
 </head>
 <body class="bg-white text-gray-900 font-display">
+
+
   <!-- Announcement Bar -->
   <div class="bg-black text-white text-center text-sm py-2">Free shipping over ₹1,999 · Easy returns 14 days</div>
 
+
   <!-- Header / Navigation -->
+
   <header class="p-4 bg-white shadow flex justify-between items-center">
   <a href="index.html" class="text-2xl font-bold">WEAR IT!</a>
   <nav class="flex items-center gap-6">
@@ -86,7 +90,7 @@
   <!-- Hero -->
   <section class="relative isolate overflow-hidden">
     <div class="absolute inset-0 -z-10">
-      <img src="https://www.shutterstock.com/image-photo/young-couple-trendy-autumn-outfit-260nw-2023605341.jpg" alt="Fashion banner" class="h-full w-full object-cover" />
+      <img src="https://t4.ftcdn.net/jpg/03/13/65/17/360_F_313651795_OUrd7HrFYuxo9LXuuREFvRyIPeEfVSLj.jpg" alt="Fashion banner" class="h-full w-full object-cover" />
       <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/20"></div>
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 sm:py-36">
@@ -223,90 +227,95 @@
 
   <!-- App Script: mock products + basic interactions -->
   <script>
-    const products = [
-      { id: 1, name: 'Oversize Hoodie — Jet Black', price: 1499, img: 'https://static.vecteezy.com/system/resources/thumbnails/056/106/307/small/a-sleek-black-hoodie-displayed-png.png', tag: 'new', date: '2025-08-12' },
-      { id: 2, name: 'Classic Tee — Off‑White', price: 799, img: 'https://i5.walmartimages.com/seo/Gildan-Short-Sleeve-Crewneck-T-Shirt-Off-White-Size-XL-Men-s-Classic-Fit-Comfort-Tee-100-Heavy-Cotton-Arts-and-Craft-Shirt_6ae50ea8-6b63-456a-bcff-dcbfcb1a52ec.d9dc0f7a2fbdf1d8b84534f9efcb950c.jpeg', tag: 'new', date: '2025-08-10' },
-      { id: 3, name: 'Relaxed Jeans — Indigo', price: 1999, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MDORb_PdmL73qddQUFTyFgJfWHOTBKAgBA&s', tag: 'trend', date: '2025-08-02' },
-      { id: 4, name: 'Ribbed Tank — Sage', price: 699, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7_lNAHOr5gRCT2DOBov3QDD0HekK8aXu-TOGjSzn6A7GNzBdvwN7bUNsN2K_yJ-FZjE0&usqp=CAU', tag: 'trend', date: '2025-07-28' },
-      { id: 5, name: 'Utility Cap — Sand', price: 599, img: 'https://ethikworldwide.com/cdn/shop/products/Ethikworldwide621524cdd792a8621524cdd7be6.93814197621524cdd7be6.png?v=1645552873&width=1445', tag: 'drop', date: '2025-07-22' },
-      { id: 6, name: 'Everyday Tote — Charcoal', price: 1299, img: 'https://m.media-amazon.com/images/I/51uqEJ0qvXL._UY1100_.jpg', tag: 'drop', date: '2025-07-18' },
-      { id: 7, name: 'Cropped Tee — Blush', price: 899, img: 'https://m.media-amazon.com/images/I/71nAufY+TpL._UY1100_.jpg', tag: 'new', date: '2025-08-14' },
-      { id: 8, name: 'Linen Shirt — Sky', price: 1699, img: 'https://5.imimg.com/data5/SELLER/Default/2021/10/LB/OI/ZU/6386907/linen-shirts-500x500.jpg', tag: 'trend', date: '2025-07-05' },
-    ];
+  const products = [
+    { id: 1, name: 'Oversize Hoodie — Jet Black', price: 1499, img: 'https://static.vecteezy.com/system/resources/thumbnails/056/106/307/small/a-sleek-black-hoodie-displayed-png.png', tag: 'new', date: '2025-08-12' },
+    { id: 2, name: 'Classic Tee — Off-White', price: 799, img: 'https://i5.walmartimages.com/seo/Gildan-Short-Sleeve-Crewneck-T-Shirt-Off-White-Size-XL-Men-s-Classic-Fit-Comfort-Tee-100-Heavy-Cotton-Arts-and-Craft-Shirt_6ae50ea8-6b63-456a-bcff-dcbfcb1a52ec.d9dc0f7a2fbdf1d8b84534f9efcb950c.jpeg', tag: 'new', date: '2025-08-10' },
+    { id: 3, name: 'Relaxed Jeans — Indigo', price: 1999, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7MDORb_PdmL73qddQUFTyFgJfWHOTBKAgBA&s', tag: 'trend', date: '2025-08-02' },
+    { id: 4, name: 'Ribbed Tank — Sage', price: 699, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7_lNAHOr5gRCT2DOBov3QDD0HekK8aXu-TOGjSzn6A7GNzBdvwN7bUNsN2K_yJ-FZjE0&usqp=CAU', tag: 'trend', date: '2025-07-28' },
+    { id: 5, name: 'Utility Cap — Sand', price: 599, img: 'https://ethikworldwide.com/cdn/shop/products/Ethikworldwide621524cdd792a8621524cdd7be6.93814197621524cdd7be6.png?v=1645552873&width=1445', tag: 'drop', date: '2025-07-22' },
+    { id: 6, name: 'Everyday Tote — Charcoal', price: 1299, img: 'https://m.media-amazon.com/images/I/51uqEJ0qvXL._UY1100_.jpg', tag: 'drop', date: '2025-07-18' },
+    { id: 7, name: 'Cropped Tee — Blush', price: 899, img: 'https://m.media-amazon.com/images/I/71nAufY+TpL._UY1100_.jpg', tag: 'new', date: '2025-08-14' },
+    { id: 8, name: 'Linen Shirt — Sky', price: 1699, img: 'https://5.imimg.com/data5/SELLER/Default/2021/10/LB/OI/ZU/6386907/linen-shirts-500x500.jpg', tag: 'trend', date: '2025-07-05' },
+  ];
 
-    const productGrid = document.getElementById('productGrid');
-    const sortBtn = document.getElementById('sortBtn');
-    const sortLabel = document.getElementById('sortLabel');
-    let sortMode = 'newest';
+  const productGrid = document.getElementById('productGrid');
+  const sortBtn = document.getElementById('sortBtn');
+  const sortLabel = document.getElementById('sortLabel');
+  let sortMode = 'newest';
 
-    function renderProducts(list) {
-      productGrid.innerHTML = list.map(p => `
-        <article class="group bg-white rounded-2xl overflow-hidden border hover:shadow-soft transition">
-          <a href="product.html?id=${p.id}" class="block relative">
-            <img src="${p.img}" alt="${p.name}" class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-300"/>
-            <span class="absolute top-3 left-3 text-xs px-2 py-1 rounded-full bg-white/90 border">${p.tag}</span>
-          </a>
-          <div class="p-4">
-            <h3 class="font-medium leading-snug">${p.name}</h3>
-            <div class="mt-2 flex items-center justify-between">
-              <p class="font-semibold">₹${p.price.toLocaleString('en-IN')}</p>
-              <button data-id="${p.id}" class="add-to-cart text-sm px-3 py-1.5 rounded-xl border hover:bg-gray-50">Add to cart</button>
-            </div>
+  // ✅ RENDER PRODUCTS
+  function renderProducts(list) {
+    productGrid.innerHTML = list.map(p => `
+      <article class="group bg-white rounded-2xl overflow-hidden border hover:shadow-soft transition">
+        <a href="product.html?id=${p.id}" class="block relative">
+          <img src="${p.img}" alt="${p.name}" class="h-56 w-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+          <span class="absolute top-3 left-3 text-xs px-2 py-1 rounded-full bg-white/90 border">${p.tag}</span>
+        </a>
+        <div class="p-4">
+          <h3 class="font-medium leading-snug">${p.name}</h3>
+          <div class="mt-2 flex items-center justify-between">
+            <p class="font-semibold">₹${p.price.toLocaleString('en-IN')}</p>
+            <button data-id="${p.id}" class="add-to-cart text-sm px-3 py-1.5 rounded-xl border hover:bg-gray-50">Add to cart</button>
           </div>
-        </article>
-      `).join('');
+        </div>
+      </article>
+    `).join('');
 
-      // Bind add-to-cart
-      document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const id = +btn.getAttribute('data-id');
-          addToCart(id);
-        });
+    // ✅ Add-to-Cart functionality
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = +btn.getAttribute('data-id');
+        addToCart(id);
       });
-    }
-
-    function sortProducts(mode){
-      const list = [...products];
-      if(mode === 'newest') list.sort((a,b) => new Date(b.date) - new Date(a.date));
-      if(mode === 'priceLow') list.sort((a,b) => a.price - b.price);
-      if(mode === 'priceHigh') list.sort((a,b) => b.price - a.price);
-      renderProducts(list);
-    }
-
-    // Cart (very basic mock)
-    const cartKey = 'wearit_cart';
-    function getCart(){
-      try { return JSON.parse(localStorage.getItem(cartKey)) || []; } catch { return []; }
-    }
-    function setCart(v){ localStorage.setItem(cartKey, JSON.stringify(v)); updateCartCount(); }
-    function addToCart(productId){
-      const cart = getCart();
-      const item = cart.find(i => i.id === productId);
-      if(item) { item.qty += 1; } else { cart.push({ id: productId, qty: 1 }); }
-      setCart(cart);
-    }
-    function updateCartCount(){
-      const count = getCart().reduce((sum, i) => sum + i.qty, 0);
-      const el = document.getElementById('cart-count');
-      if(el) el.textContent = count;
-    }
-
-    // Sort button cycle
-    sortBtn?.addEventListener('click', () => {
-      sortMode = sortMode === 'newest' ? 'priceLow' : sortMode === 'priceLow' ? 'priceHigh' : 'newest';
-      sortLabel.textContent = sortMode === 'newest' ? 'Newest' : sortMode === 'priceLow' ? 'Price: Low → High' : 'Price: High → Low';
-      sortProducts(sortMode);
     });
+  }
 
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileNav = document.getElementById('mobileNav');
-    menuBtn?.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+  // ✅ SORTING
+  function sortProducts(mode){
+    const list = [...products];
+    if(mode === 'newest') list.sort((a,b) => new Date(b.date) - new Date(a.date));
+    if(mode === 'priceLow') list.sort((a,b) => a.price - b.price);
+    if(mode === 'priceHigh') list.sort((a,b) => b.price - a.price);
+    renderProducts(list);
+  }
 
-    // Init
-    document.getElementById('year').textContent = new Date().getFullYear();
+  // ✅ CART FUNCTIONS
+  function getCart(){
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  }
+  function setCart(v){
+    localStorage.setItem("cart", JSON.stringify(v));
     updateCartCount();
-    sortProducts('newest');
+  }
+  function addToCart(productId){
+    const cart = getCart();
+    const product = products.find(p => p.id === productId);
+    if(!product) return;
+    const item = cart.find(i => i.id === productId);
+    if(item) item.qty += 1;
+    else cart.push({...product, qty: 1});
+    setCart(cart);
+    alert("✅ Added to cart!");
+  }
+  function updateCartCount(){
+    const count = getCart().reduce((sum, i) => sum + i.qty, 0);
+    const el = document.getElementById('cart-count');
+    if(el) el.textContent = count;
+  }
+
+  // ✅ SORT BUTTON CYCLE
+  sortBtn?.addEventListener('click', () => {
+    sortMode = sortMode === 'newest' ? 'priceLow' : sortMode === 'priceLow' ? 'priceHigh' : 'newest';
+    sortLabel.textContent = sortMode === 'newest' ? 'Newest' : sortMode === 'priceLow' ? 'Price: Low → High' : 'Price: High → Low';
+    sortProducts(sortMode);
+  });
+
+  // ✅ INIT
+  document.getElementById('year').textContent = new Date().getFullYear();
+  updateCartCount();
+  sortProducts('newest');
+</script>
+
   </script>
   <script>
   function updateAuthLink() {
@@ -329,19 +338,6 @@
 
   updateAuthLink();
 </script>
-  <script type="module">
-  import { createClient } from 'https://esm.sh/@supabase/supabase-js'
-
-  const supabaseUrl = 'https://tmzclqswtxvuounotpsp.supabase.co'
-  const supabaseAnonKey = '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'
-
-  const supabase = createClient(supabaseUrl, supabaseAnonKey)
-
-  // Example: Fetch data from your "users" table
-  const { data, error } = await supabase.from('users').select('*')
-  console.log(data)
-</script>
-
 
 </body>
 <script>
@@ -352,6 +348,19 @@
   }
   updateCartCount();
 </script>
+<script>
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    document.getElementById("cartCount").textContent = cart.length;
+  }
+  updateCartCount();
+</script>
+
 
 </html>
+
+
+
+
+
 
