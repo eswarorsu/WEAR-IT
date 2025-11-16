@@ -329,6 +329,19 @@
 
   updateAuthLink();
 </script>
+  <script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+
+  const supabaseUrl = 'https://tmzclqswtxvuounotpsp.supabase.co'
+  const supabaseAnonKey = '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'
+
+  const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+  // Example: Fetch data from your "users" table
+  const { data, error } = await supabase.from('users').select('*')
+  console.log(data)
+</script>
+
 
 </body>
 <script>
@@ -341,3 +354,4 @@
 </script>
 
 </html>
+
