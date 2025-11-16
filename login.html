@@ -1,42 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | WEAR IT!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+    <h2 id="form-title" class="text-2xl font-bold mb-6 text-center">Login</h2>
+
+    <form id="authForm" class="space-y-4">
+      <div id="nameField" class="hidden">
+        <label class="block text-sm font-medium">Full Name</label>
+        <input type="text" id="name" class="w-full p-2 border rounded-lg">
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Email</label>
+        <input type="email" id="email" class="w-full p-2 border rounded-lg" required>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Password</label>
+        <input type="password" id="password" class="w-full p-2 border rounded-lg" required>
+      </div>
+
+      <div id="otpField" class="hidden">
+        <label class="block text-sm font-medium">Enter OTP</label>
+        <input type="text" id="otpInput" maxlength="4" class="w-full p-2 border rounded-lg" placeholder="4-digit OTP">
+      </div>
+
+      <button type="submit" class="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800">
+        <span id="submitText">Login</span>
+      </button>
+    </form>
+
+    <p class="text-center mt-4 text-sm">
+      <span id="toggleText">Don't have an account?</span>
+      <button id="toggleBtn" class="text-blue-600 font-medium hover:underline">Create one</button>
+    </p>
+  </div>
+
+  <script>
+    const form = document.getElementById("authForm");
+    const toggleBtn = document.getElementById("toggleBtn");
+    const toggleText = document.getElementById("toggleText");
+    const formTitle = document.getElementById("form-title");
+    const nameField = document.getElementById("nameField");
+    const otpField = document.getElementById("otpField");
+    const submitText = document.getElementById("submitText");
+
+    let isLogin = true; // default mode
+    let generatedOTP = null;
+    let tempUser = null;
+
+    // Toggle between Login and Register
+    toggleBtn.addEventListener("click", () => {
+      isLogin = !isLogin;
+      resetForm();
+    });
+
+    function resetForm() {
+      if (isLogin) {
+        formTitle.textContent = "Login";
+        submitText.textContent = "Login";
+        toggleText.textContent = "Don't have an account?";
+        toggleBtn.textContent = "Create one";
+        nameField.classList.add("hidden");
+        otpField.classList.add("hidden");
+      } else {
+        formTitle.textContent = "Register";
+        submitText.textContent = "Register";
+        toggleText.textContent = "Already have an account?";
+        toggleBtn.textContent = "Login here";
+        nameField.classList.remove("hidden");
+        otpField.classList.add("hidden");
+      }
+    }
+
+    // Handle Login / Register
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      // --- START Validation Block for Registration (NEW) ---
+      if (!isLogin && !generatedOTP) { // Check only if registering and not verifying OTP
+        const name = document.getElementById("name").value;
+
+        // 1. Check for empty fields
+        if (!name || !email || !password) {
+          alert("All registration fields must be filled out.");
+          return; // Stop execution
+        }
+
+        // 2. Check for valid email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert("Please enter a valid email address.");
+          return; // Stop execution
+        }
+
+        // 3. Check for password strength
+        if (password.length < 6) {
+          alert("Password must be at least 6 characters long.");
+          return; // Stop execution
+        }
+      }
+      // --- END Validation Block ---
 
 
-<script type="module">
-  import { createClient } from 'https://esm.sh/@supabase/supabase-js'
+      if (isLogin) {
+        // Login
+        const user = users.find(u => u.email === email && u.password === password);
+        if (user) {
+          localStorage.setItem("loggedInUser", JSON.stringify(user));
+          alert("Login successful! Welcome " + user.name);
+          // Corrected link from index1.html to index.html
+          window.location.href = "index.html"; 
+        }  else {
+          alert("Invalid credentials!");
+        }
+      } else {
+        // Registration with OTP step
+        if (!generatedOTP) {
+          const name = document.getElementById("name").value;
+          const exists = users.some(u => u.email === email);
+          if (exists) {
+            alert("Email already registered. Please login.");
+            return;
+          }
 
-  const supabase = createClient(
-    'https://YOUR-PROJECT-ID.supabase.co',
-    'YOUR-ANON-PUBLIC-KEY'
-  )
+          // Generate OTP
+          generatedOTP = Math.floor(1000 + Math.random() * 9000);
+          tempUser = { name, email, password };
+          alert("Your OTP is: " + generatedOTP + " (for demo, normally sent via SMS/Email)");
 
-  // Sign Up
-  async function signUp() {
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-    const { error } = await supabase.auth.signUp({ email, password })
-    alert(error ? error.message : 'Signup link sent! Check your email.')
-  }
+          otpField.classList.remove("hidden");
+          submitText.textContent = "Verify OTP";
+        } else {
+          // Verify OTP
+          const otpInput = document.getElementById("otpInput").value;
+          if (otpInput == generatedOTP) {
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            users.push(tempUser);
+            localStorage.setItem("users", JSON.stringify(users));
 
-  // Log In
-  async function logIn() {
-    const email = document.getElementById('email').value
-    const password = document.getElementById('password').value
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    alert(error ? error.message : 'Logged in successfully!')
-  }
+            alert("Registration successful! Please login now.");
+            
+            // Reset back to login
+            isLogin = true;
+            generatedOTP = null;
+            tempUser = null;
+            resetForm();
+          } else {
+            alert("Invalid OTP. Please try again.");
+          
+          }
+        }
+      }
+    });
+  </script>
 
-  // Log Out
-  async function logOut() {
-    await supabase.auth.signOut()
-    alert('Logged out!')
-  }
-</script>
+  <script>
+    // If already logged in → skip login page
+    // Corrected link from index1.html to index.html
+    if (localStorage.getItem("loggedInUser")) {
+      window.location.href = "index.html";
+    }
+    // Removed the conflicting second script block from original file
+  </script>
 
-<div style="margin:50px;">
-  <h2>Supabase Auth</h2>
-  <input type="email" id="email" placeholder="Email" />
-  <input type="password" id="password" placeholder="Password" />
-  <br /><br />
-  <button onclick="signUp()">Sign Up</button>
-  <button onclick="logIn()">Login</button>
-  <button onclick="logOut()">Logout</button>
-</div>
+</body>
+</html>
